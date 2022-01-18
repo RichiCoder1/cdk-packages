@@ -20,7 +20,11 @@ jobs:
           node-version-file: .node-version
           cache: yarn
 
-      - run: yarn install --immutable --immutable-cache
+      - if: github.actor != "renovate[bot]"
+        run: yarn install --immutable --immutable-cache
+      - if: github.actor == "renovate[bot]"
+        run: yarn install
+
       - run: yarn build
       - run: yarn docs
 
