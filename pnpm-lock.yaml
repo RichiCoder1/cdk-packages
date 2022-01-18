@@ -12,7 +12,7 @@ importers:
       npm-run-all: 4.1.5
       turbo: 1.0.28
 
-  packages/ecs-s3-files:
+  packages/ecs-s3volume:
     specifiers:
       aws-cdk-lib: 2.8.0
       constructs: 10.0.37
