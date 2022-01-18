@@ -1,1 +1,12 @@
 node_modules/
+
+# JSII
+packages/**/*tsconfig.json
+*.tsbuildinfo
+*.js
+*.d.ts
+.jsii
+cdk.out/
+
+# Caching
+packages/**/.turbo
