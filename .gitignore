@@ -1,7 +1,7 @@
 node_modules/
 
 # JSII
-packages/**/*tsconfig.json
+packages/**/tsconfig.json
 *.tsbuildinfo
 *.js
 *.d.ts

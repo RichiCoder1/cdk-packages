@@ -4,6 +4,7 @@
   ],
   "scripts": {
     "build": "turbo run build",
+    "docs": "turbo run docs",
     "release:build": "turbo run release",
     "release:publish": "changeset publish",
     "release": "run-s release:*"
@@ -20,6 +21,10 @@
           ".cdk-out/**",
           ".jsii"
         ]
+      },
+      "docs": {
+        "dependsOn": ["build"],
+        "outputs": ["API.md"]
       },
       "release": {
         "dependsOn": [
