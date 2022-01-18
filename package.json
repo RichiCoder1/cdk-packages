@@ -10,7 +10,7 @@
     "release:publish": "changeset publish",
     "release": "run-s release:build release:publish"
   },
-  "packageManager": "yarn@2.4.3",
+  "packageManager": "yarn@3.1.1",
   "turbo": {
     "baseBranch": "origin/main",
     "npmClient": "yarn",
