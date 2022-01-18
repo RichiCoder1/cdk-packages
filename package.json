@@ -8,7 +8,7 @@
     "docs": "turbo run docs",
     "release:build": "turbo run release",
     "release:publish": "changeset publish",
-    "release": "run-s release:*"
+    "release": "run-s release:build release:publish"
   },
   "packageManager": "yarn@2.4.3",
   "turbo": {
