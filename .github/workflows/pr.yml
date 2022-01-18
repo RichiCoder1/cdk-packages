@@ -20,7 +20,7 @@ jobs:
           node-version-file: .node-version
           cache: yarn
 
-      - run: yarn install --immutable-cache
+      - run: yarn install
 
       - run: yarn build
       - run: yarn docs
