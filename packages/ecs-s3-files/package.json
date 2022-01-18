@@ -1,0 +1,45 @@
+{
+  "name": "@richicoder/cdk-ecs-s3-files",
+  "version": "0.1.0",
+  "description": "A helper library for copying from s3 at ECS startup.",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "scripts": {
+    "build": "jsii",
+    "test": "echo 'No Test'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/richicoder1/cdk-packages.git"
+  },
+  "keywords": [
+    "cdk",
+    "ecs",
+    "s3",
+    "files",
+    "configmap"
+  ],
+  "author": "Richard Simpson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/richicoder1/cdk-packages/issues"
+  },
+  "stability": "experimental",
+  "jsii": {
+    "outdir": "dist",
+    "versionFormat": "full"
+  },
+  "homepage": "https://github.com/richicoder1/cdk-packages#readme",
+  "devDependencies": {
+    "aws-cdk-lib": "2.8.0",
+    "constructs": "10.0.37",
+    "jsii": "^1.52.1",
+    "jsii-docgen": "^4.2.44",
+    "jsii-pacmak": "^1.52.1",
+    "jsii-release": "^0.2.234"
+  },
+  "peerDependencies": {
+    "aws-cdk-lib": "^2.7.0",
+    "constructs": "^10.0.30"
+  }
+}

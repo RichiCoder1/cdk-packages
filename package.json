@@ -2,6 +2,22 @@
   "workspaces": [
     "packages/**"
   ],
+  "scripts": {
+    "build": "turbo run build",
+    "publish": "turbo run publish"
+  },
+  "turbo": {
+    "baseBranch": "origin/main",
+    "pipeline": {
+      "build": {
+        "dependsOn": ["^build"],
+        "outputs": [".cdk-out/**", ".jsii"]
+      },
+      "publish": {
+        "dependsOn": ["build"]
+      }
+    }
+  },
   "devDependencies": {
     "@changesets/cli": "^2.19.0",
     "turbo": "^1.0.28"
