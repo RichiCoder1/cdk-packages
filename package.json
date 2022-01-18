@@ -9,9 +9,10 @@
     "release:publish": "changeset publish",
     "release": "run-s release:*"
   },
+  "packageManager": "pnpm@6.27.0",
   "turbo": {
     "baseBranch": "origin/main",
-    "npmClient": "npm",
+    "npmClient": "pnpm",
     "pipeline": {
       "build": {
         "dependsOn": [
