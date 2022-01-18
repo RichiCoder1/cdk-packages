@@ -34,10 +34,10 @@
   "devDependencies": {
     "aws-cdk-lib": "2.8.0",
     "constructs": "10.0.37",
-    "jsii": "^1.52.1",
-    "jsii-docgen": "^4.2.44",
-    "jsii-pacmak": "^1.52.1",
-    "jsii-release": "^0.2.234"
+    "jsii": "1.52.1",
+    "jsii-docgen": "4.2.44",
+    "jsii-pacmak": "1.52.1",
+    "jsii-release": "0.2.234"
   },
   "peerDependencies": {
     "aws-cdk-lib": "^2.7.0",
