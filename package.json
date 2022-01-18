@@ -3,17 +3,17 @@
     "packages/**"
   ],
   "scripts": {
-    "preinstall": "npx only-allow pnpm",
+    "preinstall": "npx -y only-allow yarn",
     "build": "turbo run build",
     "docs": "turbo run docs",
     "release:build": "turbo run release",
     "release:publish": "changeset publish",
     "release": "run-s release:*"
   },
-  "packageManager": "pnpm@6.27.0",
+  "packageManager": "yarn@2.4.3",
   "turbo": {
     "baseBranch": "origin/main",
-    "npmClient": "pnpm",
+    "npmClient": "yarn",
     "pipeline": {
       "build": {
         "dependsOn": [
@@ -25,8 +25,12 @@
         ]
       },
       "docs": {
-        "dependsOn": ["build"],
-        "outputs": ["API.md"]
+        "dependsOn": [
+          "build"
+        ],
+        "outputs": [
+          "API.md"
+        ]
       },
       "release": {
         "dependsOn": [
