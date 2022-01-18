@@ -1,0 +1,9 @@
+{
+  "workspaces": [
+    "packages/**"
+  ],
+  "devDependencies": {
+    "@changesets/cli": "^2.19.0",
+    "turbo": "^1.0.28"
+  }
+}
