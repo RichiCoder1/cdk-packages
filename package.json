@@ -3,7 +3,6 @@
     "packages/**"
   ],
   "scripts": {
-    "preinstall": "npx -y only-allow yarn",
     "build": "turbo run build",
     "docs": "turbo run docs",
     "release:build": "turbo run release",
