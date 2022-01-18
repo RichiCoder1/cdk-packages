@@ -3,7 +3,8 @@
     "packages/**"
   ],
   "scripts": {
-    "build": "turbo run build"
+    "build": "turbo run build",
+    "publish": "turbo run publish"
   },
   "turbo": {
     "baseBranch": "origin/main",
@@ -11,6 +12,9 @@
       "build": {
         "dependsOn": ["^build"],
         "outputs": [".cdk-out/**", ".jsii"]
+      },
+      "publish": {
+        "dependsOn": ["build"]
       }
     }
   },
