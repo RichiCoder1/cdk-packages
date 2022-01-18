@@ -20,6 +20,6 @@ jobs:
 
       - run: pnpm install
       - run: pnpm build
-      - run: pnpm docs
+      - run: pnpm run docs
 
       - uses: stefanzweifel/git-auto-commit-action@v4
