@@ -1,5 +1,11 @@
 # @richicoder/cdk-ecs-s3volume
 
+## 0.2.1
+
+### Patch Changes
+
+- 8446733: Bump patch to fix releae
+
 ## 0.2.0
 
 ### Minor Changes
