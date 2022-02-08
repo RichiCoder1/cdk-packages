@@ -1,5 +1,11 @@
 # @richicoder/cdk-ecs-s3volume
 
+## 0.2.2
+
+### Patch Changes
+
+- 3c4f312: fix issue with cdk import
+
 ## 0.2.1
 
 ### Patch Changes
