@@ -6,7 +6,7 @@ import {
   ContainerDefinitionOptions
 } from "aws-cdk-lib/aws-ecs";
 
-import { Names } from "aws-cdk-lib/core";
+import { Names } from "aws-cdk-lib";
 import { IBucket, Bucket } from "aws-cdk-lib/aws-s3";
 import { Asset } from "aws-cdk-lib/aws-s3-assets";
 
