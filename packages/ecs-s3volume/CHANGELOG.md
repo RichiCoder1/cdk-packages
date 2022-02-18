@@ -1,5 +1,11 @@
 # @richicoder/cdk-ecs-s3volume
 
+## 0.3.0
+
+### Minor Changes
+
+- 740925c: try and fix issue when using asset as source
+
 ## 0.2.2
 
 ### Patch Changes
