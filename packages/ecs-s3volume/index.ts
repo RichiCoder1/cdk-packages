@@ -9,6 +9,7 @@ import {
 import { Names } from "aws-cdk-lib";
 import { IBucket, Bucket } from "aws-cdk-lib/aws-s3";
 import { Asset } from "aws-cdk-lib/aws-s3-assets";
+import { parse } from "node:path";
 
 /** S3 Volume Properties */
 export interface S3VolumeProps {
@@ -63,11 +64,21 @@ export interface S3VolumeProps {
 export class S3Volume implements ITaskDefinitionExtension {
   constructor(private id: string, private props: S3VolumeProps) {}
 
-  public static fromAsset(containerPath: string, asset: Asset) {
+  public static fromAsset(assetPath: string, asset: Asset) {
+    if (asset.isFile) {
+      if (assetPath.endsWith('/')) {
+        throw new Error('You must specify a full file path for assetPath when asset is a single file.')
+      }
+      const { ext } = parse(assetPath);
+      if (!ext) {
+        console.log(`The path ${assetPath} doesn't have an extension. The assetPath should be the full path of the asset to be copied too.`);
+      }
+    } else {
+      throw new Error('S3Volume does not yet support zip assets.');
+    }
     return new S3Volume(Names.uniqueId(asset), {
-      bucket: asset.bucket,
-      extraOptions: [`--exclude="*"`, `--include="${asset.assetPath}"`],
-      containerPath,
+      asset,
+      containerPath: assetPath,
     });
   } 
 
@@ -108,21 +119,34 @@ export class S3Volume implements ITaskDefinitionExtension {
       this.props.containerPath ?? `/etc/s3/${bucket.bucketName}/`;
 
     const syncContainerId = `s3-sync-${Names.uniqueId(taskDefinition)}`;
-    const syncCommand = [
-      "s3",
-      "sync",
-      this.props.asset ? this.props.asset.s3ObjectUrl : bucket.s3UrlForObject(this.props.bucketKey),
-      containerPath,
-      "--only-show-errors",
-      ...(this.props.extraOptions ?? [])
-    ];
+    let s3Command: string[];
+    if (this.props.asset) {
+      const { asset } = this.props;
+      s3Command = [
+        "s3",
+        "cp",
+        asset.s3ObjectUrl,
+        containerPath,
+        "--only-show-errors",
+        ...(this.props.extraOptions ?? [])
+      ];
+    } else {
+      s3Command = [
+        "s3",
+        "sync",
+        bucket.s3UrlForObject(this.props.bucketKey),
+        containerPath,
+        "--only-show-errors",
+        ...(this.props.extraOptions ?? [])
+      ];
+    }
 
     const syncContainer = taskDefinition.addContainer(syncContainerId, {
       // TODO: Add dependabot/renovate to keep this up to date.
       image: ContainerImage.fromRegistry(`amazon/aws-cli:2.4.11`),
       essential: false,
       ...(this.props.syncContainerOptions ?? {}),
-      command: syncCommand,
+      command: s3Command,
     });
 
     syncContainer.addMountPoints({
