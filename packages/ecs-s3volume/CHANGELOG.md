@@ -1,5 +1,11 @@
 # @richicoder/cdk-ecs-s3volume
 
+## 0.3.1
+
+### Patch Changes
+
+- b947462: update dependencies
+
 ## 0.3.0
 
 ### Minor Changes
