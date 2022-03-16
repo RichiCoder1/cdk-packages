@@ -1,0 +1,17 @@
+{
+  "baseBranch": "origin/main",
+  "npmClient": "pnpm",
+  "pipeline": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": [".cdk-out/**", ".jsii"]
+    },
+    "docs": {
+      "dependsOn": ["build"],
+      "outputs": ["API.md"]
+    },
+    "release": {
+      "dependsOn": ["build"]
+    }
+  }
+}

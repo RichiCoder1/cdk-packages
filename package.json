@@ -6,39 +6,12 @@
   "scripts": {
     "build": "turbo run build",
     "docs": "turbo run docs",
+    "changeset": "changeset",
     "release:build": "turbo run release",
     "release:publish": "changeset publish",
     "release": "run-s release:build release:publish"
   },
   "packageManager": "pnpm@6.32.3",
-  "turbo": {
-    "baseBranch": "origin/main",
-    "npmClient": "pnpm",
-    "pipeline": {
-      "build": {
-        "dependsOn": [
-          "^build"
-        ],
-        "outputs": [
-          ".cdk-out/**",
-          ".jsii"
-        ]
-      },
-      "docs": {
-        "dependsOn": [
-          "build"
-        ],
-        "outputs": [
-          "API.md"
-        ]
-      },
-      "release": {
-        "dependsOn": [
-          "build"
-        ]
-      }
-    }
-  },
   "devDependencies": {
     "@changesets/cli": "2.21.1",
     "npm-run-all": "4.1.5",
