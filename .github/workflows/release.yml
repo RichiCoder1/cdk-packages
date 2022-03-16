@@ -16,7 +16,7 @@ jobs:
           node-version-file: .node-version
           cache: pnpm
 
-      - run: pnpm run install
+      - run: pnpm install
       - run: pnpm run build
 
       - uses: changesets/action@v1
