@@ -13,14 +13,14 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: corepack enable && corepack prepare
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
           node-version-file: .node-version
-          cache: yarn
+          cache: pnpm
 
-      - run: yarn install
+      - run: pnpm install
 
-      - run: yarn build
-      - run: yarn docs
+      - run: pnpm run build
+      - run: pnpm run docs
 
       - uses: stefanzweifel/git-auto-commit-action@v4

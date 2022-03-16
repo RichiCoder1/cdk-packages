@@ -209,10 +209,10 @@ public extend(taskDefinition: TaskDefinition)
 ```typescript
 import { S3Volume } from '@richicoder/cdk-ecs-s3volume'
 
-S3Volume.fromAsset(containerPath: string, asset: Asset)
+S3Volume.fromAsset(assetPath: string, asset: Asset)
 ```
 
-###### `containerPath`<sup>Required</sup> <a name="@richicoder/cdk-ecs-s3volume.S3Volume.parameter.containerPath" id="richicodercdkecss3volumes3volumeparametercontainerpath"></a>
+###### `assetPath`<sup>Required</sup> <a name="@richicoder/cdk-ecs-s3volume.S3Volume.parameter.assetPath" id="richicodercdkecss3volumes3volumeparameterassetpath"></a>
 
 - *Type:* `string`
 

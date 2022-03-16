@@ -32,15 +32,15 @@
   },
   "homepage": "https://github.com/richicoder1/cdk-packages#readme",
   "devDependencies": {
-    "aws-cdk-lib": "2.8.0",
-    "constructs": "10.0.37",
-    "jsii": "1.52.1",
-    "jsii-docgen": "4.2.44",
-    "jsii-pacmak": "1.52.1",
-    "jsii-release": "0.2.234"
+    "aws-cdk-lib": "2.15.0",
+    "constructs": "10.0.89",
+    "jsii": "1.55.0",
+    "jsii-docgen": "6.1.35",
+    "jsii-pacmak": "1.55.0",
+    "jsii-release": "0.2.292"
   },
   "peerDependencies": {
-    "aws-cdk-lib": "^2.7.0",
+    "aws-cdk-lib": "^2.15.0",
     "constructs": "^10.0.30"
   }
 }
