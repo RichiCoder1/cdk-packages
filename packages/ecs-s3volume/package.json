@@ -32,7 +32,7 @@
   },
   "homepage": "https://github.com/richicoder1/cdk-packages#readme",
   "devDependencies": {
-    "aws-cdk-lib": "2.15.0",
+    "aws-cdk-lib": "2.16.0",
     "constructs": "10.0.89",
     "jsii": "1.55.0",
     "jsii-docgen": "6.1.35",
