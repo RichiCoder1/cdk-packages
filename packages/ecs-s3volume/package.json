@@ -35,7 +35,7 @@
     "aws-cdk-lib": "2.15.0",
     "constructs": "10.0.89",
     "jsii": "1.55.0",
-    "jsii-docgen": "6.1.35",
+    "jsii-docgen": "6.3.27",
     "jsii-pacmak": "1.55.0",
     "jsii-release": "0.2.292"
   },
