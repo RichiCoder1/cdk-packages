@@ -64,7 +64,7 @@ export interface S3VolumeProps {
 export class S3Volume implements ITaskDefinitionExtension {
   constructor(private id: string, private props: S3VolumeProps) {}
 
-  public static fromAsset(assetPath: string, asset: Asset) {
+  public static fromAsset(assetPath: string, asset: Asset, options?: S3VolumeProps) {
     if (asset.isFile) {
       if (assetPath.endsWith('/')) {
         throw new Error('You must specify a full file path for assetPath when asset is a single file.')
@@ -77,6 +77,7 @@ export class S3Volume implements ITaskDefinitionExtension {
       throw new Error('S3Volume does not yet support zip assets.');
     }
     return new S3Volume(Names.uniqueId(asset), {
+      ...options,
       asset,
       containerPath: assetPath,
     });
