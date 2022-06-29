@@ -185,8 +185,7 @@ export class S3Volume implements ITaskDefinitionExtension {
       image: ContainerImage.fromRegistry(`amazon/aws-cli:2.7.11`),
       essential: false,
       ...(this.props.syncContainerOptions ?? {}),
-      memoryReservationMiB: 512 ?? this.props.syncContainerOptions?.memoryReservationMiB,
-      cpu: 256 ?? this.props.syncContainerOptions?.cpu,
+      memoryReservationMiB: 256 ?? this.props.syncContainerOptions?.memoryReservationMiB,
       command: s3Command,
     });
 
