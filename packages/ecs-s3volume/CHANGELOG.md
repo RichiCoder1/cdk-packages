@@ -1,5 +1,11 @@
 # @richicoder/cdk-ecs-s3volume
 
+## 0.5.4
+
+### Patch Changes
+
+- e70d46b: fix contents path functionality
+
 ## 0.5.3
 
 ### Patch Changes
