@@ -59,12 +59,49 @@ export interface S3VolumeProps {
    * @default - Latest aws/aws-cli image and essential: false.
    */
   readonly syncContainerOptions?: ContainerDefinitionOptions;
+}/** S3 Volume Properties */
+
+export interface S3VolumeAssetProps {
+  /**
+   * Extra options to add to s3 sync command. See <https://docs.aws.amazon.com/cli/latest/reference/s3/sync.html> for full details.
+   * @example
+   * new S3VolumeExtension({
+   *   // ...
+   *   extraOptions: [`--exclude="*"`, `--include="*.config"`]
+   *   // ...
+   * });
+   * @default - Empty
+   */
+  readonly extraOptions?: string[];
+  /**
+   * Name of the volume to mount.
+   * @default - Unique id
+   */
+  readonly volume?: string;
+  /**
+   * Path to mount S3 volume.
+   * @default - /etc/s3/${props.bucket}/
+   */
+  readonly containerPath?: string;
+  /**
+   * Container for which to mount volume.
+   * @default - Default TaskDefinition container
+   */
+  readonly dependentContainers?: string[];
+
+  /**
+   * Options to set for the S3 sync container that copies files to the target volume.
+   * Warning: All options *except* command may be overwritten.
+   * 
+   * @default - Latest aws/aws-cli image and essential: false.
+   */
+  readonly syncContainerOptions?: ContainerDefinitionOptions;
 }
 
 export class S3Volume implements ITaskDefinitionExtension {
   constructor(private id: string, private props: S3VolumeProps) {}
 
-  public static fromAsset(assetPath: string, asset: Asset, options?: S3VolumeProps) {
+  public static fromAsset(assetPath: string, asset: Asset, options?: S3VolumeAssetProps) {
     if (asset.isFile) {
       if (assetPath.endsWith('/')) {
         throw new Error('You must specify a full file path for assetPath when asset is a single file.')
