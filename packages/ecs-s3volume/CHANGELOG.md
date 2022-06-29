@@ -1,5 +1,12 @@
 # @richicoder/cdk-ecs-s3volume
 
+## 0.5.3
+
+### Patch Changes
+
+- 24a76ab: expose readOnly as an option
+- 0fd5af2: mount dirs instead of singular files
+
 ## 0.5.2
 
 ### Patch Changes
