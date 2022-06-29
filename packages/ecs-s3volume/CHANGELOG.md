@@ -1,5 +1,11 @@
 # @richicoder/cdk-ecs-s3volume
 
+## 0.5.2
+
+### Patch Changes
+
+- 2d1c737: remove default cpu reservation and only leave memory
+
 ## 0.5.1
 
 ### Patch Changes
