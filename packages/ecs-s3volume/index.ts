@@ -67,7 +67,7 @@ export interface S3VolumeProps {
    * 
    * @default true
    */
-  readonly readOnly: boolean;
+  readonly readOnly?: boolean;
 }
 
 /** S3 Volume Asset Properties */
@@ -107,7 +107,7 @@ export interface S3VolumeAssetProps {
    * 
    * @default true
    */
-  readonly readOnly: boolean;
+  readonly readOnly?: boolean;
 }
 
 export class S3Volume implements ITaskDefinitionExtension {
