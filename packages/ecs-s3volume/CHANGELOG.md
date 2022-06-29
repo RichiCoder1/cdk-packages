@@ -1,5 +1,11 @@
 # @richicoder/cdk-ecs-s3volume
 
+## 0.4.0
+
+### Minor Changes
+
+- 24f27fe: feat: add support for options to fromAsset and set default memory and CPU
+
 ## 0.3.1
 
 ### Patch Changes
