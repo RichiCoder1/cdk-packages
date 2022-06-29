@@ -9,7 +9,7 @@ import {
 import { Names } from "aws-cdk-lib";
 import { IBucket, Bucket } from "aws-cdk-lib/aws-s3";
 import { Asset } from "aws-cdk-lib/aws-s3-assets";
-import { parse } from "node:path";
+import { parse, dirname } from "node:path";
 
 /** S3 Volume Properties */
 export interface S3VolumeProps {
@@ -155,8 +155,8 @@ export class S3Volume implements ITaskDefinitionExtension {
       name: volumeName
     });
 
-    const containerPath =
-      this.props.containerPath ?? `/etc/s3/${bucket.bucketName}/`;
+    const containerDirPath =
+      dirname(this.props.containerPath ?? `/etc/s3/${bucket.bucketName}/`);
 
     const syncContainerId = `s3-sync-${Names.uniqueId(taskDefinition)}`;
     let s3Command: string[];
@@ -165,7 +165,7 @@ export class S3Volume implements ITaskDefinitionExtension {
         "s3",
         "cp",
         asset.s3ObjectUrl,
-        containerPath,
+        containerDirPath,
         "--only-show-errors",
         ...(this.props.extraOptions ?? [])
       ];
@@ -174,7 +174,7 @@ export class S3Volume implements ITaskDefinitionExtension {
         "s3",
         "sync",
         bucket.s3UrlForObject(this.props.bucketKey),
-        containerPath,
+        containerDirPath,
         "--only-show-errors",
         ...(this.props.extraOptions ?? [])
       ];
@@ -190,7 +190,7 @@ export class S3Volume implements ITaskDefinitionExtension {
     });
 
     syncContainer.addMountPoints({
-      containerPath,
+      containerPath: containerDirPath,
       sourceVolume: volumeName,
       readOnly: false
     });
@@ -215,7 +215,7 @@ export class S3Volume implements ITaskDefinitionExtension {
           condition: ContainerDependencyCondition.SUCCESS
         });
         targetContainer.addMountPoints({
-          containerPath,
+          containerPath: containerDirPath,
           sourceVolume: volumeName,
           readOnly: true
         });
@@ -226,7 +226,7 @@ export class S3Volume implements ITaskDefinitionExtension {
         condition: ContainerDependencyCondition.SUCCESS
       });
       taskDefinition.defaultContainer!.addMountPoints({
-        containerPath,
+        containerPath: containerDirPath,
         sourceVolume: volumeName,
         readOnly: true
       });
