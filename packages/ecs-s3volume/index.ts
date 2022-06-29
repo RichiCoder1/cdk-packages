@@ -18,9 +18,9 @@ export interface S3VolumeProps {
   /** The bucket to sync to the volume. One of bucket or asset must be specified. */
   readonly bucket?: string | IBucket;
 
-  /** 
-   * The key of the item to sync. Only applicable if bucket specified. 
-   * 
+  /**
+   * The key of the item to sync. Only applicable if bucket specified.
+   *
    * @default '' Defaults to whole bucket
    */
   readonly bucketKey?: string;
@@ -44,8 +44,8 @@ export interface S3VolumeProps {
    */
   readonly volume?: string;
   /**
-   * Path to mount S3 volume.
-   * @default - /etc/s3/${props.bucket}/
+   * Path to mount S3 volume and copy files. Must end in a full filename if using `path`.
+   * @default - /etc/s3/${props.bucket}/ if using bucket or bucketKey, required if using path.
    */
   readonly containerPath?: string;
   /**
@@ -57,14 +57,14 @@ export interface S3VolumeProps {
   /**
    * Options to set for the S3 sync container that copies files to the target volume.
    * Warning: All options *except* command may be overwritten.
-   * 
+   *
    * @default - Latest aws/aws-cli image and essential: false.
    */
   readonly syncContainerOptions?: ContainerDefinitionOptions;
 
   /**
    * Wether or not to mount the volume to the target container as readonly.
-   * 
+   *
    * @default true
    */
   readonly readOnly?: boolean;
@@ -97,14 +97,14 @@ export interface S3VolumeAssetProps {
   /**
    * Options to set for the S3 sync container that copies files to the target volume.
    * Warning: All options *except* command may be overwritten.
-   * 
+   *
    * @default - Latest aws/aws-cli image and essential: false.
    */
   readonly syncContainerOptions?: ContainerDefinitionOptions;
 
   /**
    * Wether or not to mount the volume to the target container as readonly.
-   * 
+   *
    * @default true
    */
   readonly readOnly?: boolean;
@@ -113,23 +113,30 @@ export interface S3VolumeAssetProps {
 export class S3Volume implements ITaskDefinitionExtension {
   constructor(private props: S3VolumeProps) {}
 
-  public static fromAsset(path: string, containerPath: string, options?: S3VolumeAssetProps) {
+  public static fromAsset(
+    path: string,
+    containerPath: string,
+    options?: S3VolumeAssetProps
+  ) {
     return new S3Volume({
       ...options,
       path,
-      containerPath,
+      containerPath
     });
-  } 
+  }
 
   public static fromBucket(targetBucket: IBucket, options?: S3VolumeProps) {
     return new S3Volume({
       ...options,
-      bucket: targetBucket,
+      bucket: targetBucket
     });
-  } 
+  }
 
   public extend(taskDefinition: TaskDefinition): void {
-    if ((!this.props.bucket && !this.props.path) || (!!this.props.bucket && !!this.props.path)) {
+    if (
+      (!this.props.bucket && !this.props.path) ||
+      (!!this.props.bucket && !!this.props.path)
+    ) {
       throw new Error("You must specify one of bucket or path.");
     }
 
@@ -137,25 +144,39 @@ export class S3Volume implements ITaskDefinitionExtension {
     let asset: Asset | null = null;
     if (this.props.path) {
       if (this.props.containerPath == null) {
-        throw new Error('You must specify containerPath when using path.')
+        throw new Error("You must specify containerPath when using path.");
       }
-      asset = new Asset(taskDefinition, `${Names.uniqueId(taskDefinition)}-asset`, {
-        path: this.props.path
-      });
+      asset = new Asset(
+        taskDefinition,
+        `${Names.uniqueId(taskDefinition)}-asset`,
+        {
+          path: this.props.path
+        }
+      );
       if (asset.isFile) {
-        if (this.props.containerPath.endsWith('/')) {
-          throw new Error('You must specify a full file path for containerPath when asset is a single file.')
+        if (this.props.containerPath.endsWith("/")) {
+          throw new Error(
+            "You must specify a full file path for containerPath when asset is a single file."
+          );
         }
         const { ext } = parse(this.props.path);
         if (!ext) {
-          console.log(`The path ${this.props.path} doesn't have an extension. The path should be the full path of the asset to be copied too.`);
+          console.log(
+            `The path ${this.props.path} doesn't have an extension. The path should be the full path of the asset to be copied too.`
+          );
         }
       } else {
-        throw new Error('S3Volume does not support folders or zips as source assets. Use bucket deployments if you need to copy multiple files.');
+        throw new Error(
+          "S3Volume does not support folders or zips as source assets. Use bucket deployments if you need to copy multiple files."
+        );
       }
       bucket = asset.bucket;
     } else if (typeof this.props.bucket === "string") {
-      bucket = Bucket.fromBucketName(taskDefinition, `${Names.uniqueId(taskDefinition)}-bucket`, this.props.bucket);
+      bucket = Bucket.fromBucketName(
+        taskDefinition,
+        `${Names.uniqueId(taskDefinition)}-bucket`,
+        this.props.bucket
+      );
     } else {
       bucket = this.props.bucket!;
     }
@@ -172,8 +193,9 @@ export class S3Volume implements ITaskDefinitionExtension {
       name: volumeName
     });
 
-    const containerDirPath =
-      dirname(this.props.containerPath ?? `/etc/s3/${bucket.bucketName}/`);
+    const containerContentsPath =
+      this.props.containerPath ?? `/etc/s3/${bucket.bucketName}/`;
+    const containerPath = dirname(containerContentsPath);
 
     const syncContainerId = `s3-sync-${Names.uniqueId(taskDefinition)}`;
     let s3Command: string[];
@@ -182,7 +204,7 @@ export class S3Volume implements ITaskDefinitionExtension {
         "s3",
         "cp",
         asset.s3ObjectUrl,
-        containerDirPath,
+        containerContentsPath,
         "--only-show-errors",
         ...(this.props.extraOptions ?? [])
       ];
@@ -191,7 +213,7 @@ export class S3Volume implements ITaskDefinitionExtension {
         "s3",
         "sync",
         bucket.s3UrlForObject(this.props.bucketKey),
-        containerDirPath,
+        containerContentsPath,
         "--only-show-errors",
         ...(this.props.extraOptions ?? [])
       ];
@@ -202,16 +224,17 @@ export class S3Volume implements ITaskDefinitionExtension {
       image: ContainerImage.fromRegistry(`amazon/aws-cli:2.7.11`),
       essential: false,
       ...(this.props.syncContainerOptions ?? {}),
-      memoryReservationMiB: 256 ?? this.props.syncContainerOptions?.memoryReservationMiB,
+      memoryReservationMiB:
+        256 ?? this.props.syncContainerOptions?.memoryReservationMiB,
       command: s3Command,
-      logging: LogDriver.awsLogs({ 
-        streamPrefix: 'ecs-s3volume',
-        logRetention: RetentionDays.TWO_WEEKS,
+      logging: LogDriver.awsLogs({
+        streamPrefix: "ecs-s3volume",
+        logRetention: RetentionDays.TWO_WEEKS
       })
     });
 
     syncContainer.addMountPoints({
-      containerPath: containerDirPath,
+      containerPath,
       sourceVolume: volumeName,
       readOnly: false
     });
@@ -236,9 +259,9 @@ export class S3Volume implements ITaskDefinitionExtension {
           condition: ContainerDependencyCondition.SUCCESS
         });
         targetContainer.addMountPoints({
-          containerPath: containerDirPath,
+          containerPath,
           sourceVolume: volumeName,
-          readOnly: this.props.readOnly ?? true,
+          readOnly: this.props.readOnly ?? true
         });
       }
     } else {
@@ -247,9 +270,9 @@ export class S3Volume implements ITaskDefinitionExtension {
         condition: ContainerDependencyCondition.SUCCESS
       });
       taskDefinition.defaultContainer!.addMountPoints({
-        containerPath: containerDirPath,
+        containerPath,
         sourceVolume: volumeName,
-        readOnly: this.props.readOnly ?? true,
+        readOnly: this.props.readOnly ?? true
       });
     }
   }
