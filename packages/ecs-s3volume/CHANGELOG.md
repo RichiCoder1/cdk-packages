@@ -1,5 +1,11 @@
 # @richicoder/cdk-ecs-s3volume
 
+## 0.5.1
+
+### Patch Changes
+
+- ecfd7be: fix using potentially unavailable method in cdk
+
 ## 0.5.0
 
 ### Minor Changes
