@@ -1,5 +1,12 @@
 # @richicoder/cdk-ecs-s3volume
 
+## 0.5.0
+
+### Minor Changes
+
+- 0626259: feat: simplify how fromAsset functions to align better with other tools
+- 0626259: feat: cleanup and slightly overhaul docs
+
 ## 0.4.0
 
 ### Minor Changes
