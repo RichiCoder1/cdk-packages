@@ -79,11 +79,6 @@ export interface S3VolumeAssetProps {
    */
   readonly volume?: string;
   /**
-   * Path to mount S3 volume.
-   * @default - /etc/s3/${props.bucket}/
-   */
-  readonly containerPath?: string;
-  /**
    * Container for which to mount volume.
    * @default - Default TaskDefinition container
    */
