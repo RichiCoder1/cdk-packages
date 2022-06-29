@@ -122,7 +122,7 @@ export class S3Volume implements ITaskDefinitionExtension {
       if (this.props.containerPath == null) {
         throw new Error('You must specify containerPath when using path.')
       }
-      asset = new Asset(taskDefinition, `${Names.uniqueResourceName(taskDefinition, {})}-asset`, {
+      asset = new Asset(taskDefinition, `${Names.uniqueId(taskDefinition)}-asset`, {
         path: this.props.path
       });
       if (asset.isFile) {
@@ -138,7 +138,7 @@ export class S3Volume implements ITaskDefinitionExtension {
       }
       bucket = asset.bucket;
     } else if (typeof this.props.bucket === "string") {
-      bucket = Bucket.fromBucketName(taskDefinition, `${Names.uniqueResourceName(taskDefinition, {})}-bucket`, this.props.bucket);
+      bucket = Bucket.fromBucketName(taskDefinition, `${Names.uniqueId(taskDefinition)}-bucket`, this.props.bucket);
     } else {
       bucket = this.props.bucket!;
     }
