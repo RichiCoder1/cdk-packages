@@ -1,0 +1,31 @@
+diff --git a/lib/docgen/view/documentation.js b/lib/docgen/view/documentation.js
+index a9955d1a4ec101a687f755dd1d8c4486a6e99eaa..70750c0e82f5c700c375a5674fd421e2d8a6f682 100644
+--- a/lib/docgen/view/documentation.js
++++ b/lib/docgen/view/documentation.js
+@@ -209,10 +209,8 @@ class Documentation {
+             return cached;
+         }
+         const created = await withTempDir(async (workdir) => {
+-            // always better not to pollute an externally provided directory
+-            await fs.copy(this.assembliesDir, workdir);
+             const ts = new reflect.TypeSystem();
+-            for (let dotJsii of await glob.promise(`${workdir}/**/.jsii`)) {
++            for (let dotJsii of await glob.promise(`${this.assembliesDir}/**/.jsii`)) {
+                 // we only transliterate the top level assembly and not the entire type-system.
+                 // note that the only reason to translate dependant assemblies is to show code examples
+                 // for expanded python arguments - which we don't to right now anyway.
+@@ -222,12 +220,12 @@ class Documentation {
+                 if (language && spec.name === this.assemblyName) {
+                     const packageDir = path.dirname(dotJsii);
+                     try {
+-                        await (0, transliterate_1.transliterateAssembly)([packageDir], [language], { loose: options.loose, unknownSnippets: jsii_rosetta_1.UnknownSnippetMode.FAIL });
++                        await (0, transliterate_1.transliterateAssembly)([packageDir], [language], { loose: options.loose, unknownSnippets: jsii_rosetta_1.UnknownSnippetMode.FAIL, outdir: workdir });
+                     }
+                     catch (e) {
+                         throw new __1.LanguageNotSupportedError(`Laguage ${language} is not supported for package ${this.assemblyFqn}`);
+                     }
+-                    dotJsii = path.join(packageDir, `.jsii.${language}`);
++                    dotJsii = path.join(workdir, `.jsii.${language}`);
+                 }
+                 await ts.load(dotJsii, { validate: options.validate });
+             }

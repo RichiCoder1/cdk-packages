@@ -24,7 +24,7 @@ export interface S3VolumeProps {
   readonly bucketKey?: string;
 
   /** The asset to sync to the volume. One of bucket or asset must be specified. */
-  readonly asset?: Asset;
+  readonly path?: string;
   /**
    * Extra options to add to s3 sync command. See <https://docs.aws.amazon.com/cli/latest/reference/s3/sync.html> for full details.
    * @example
@@ -99,50 +99,57 @@ export interface S3VolumeAssetProps {
 }
 
 export class S3Volume implements ITaskDefinitionExtension {
-  constructor(private id: string, private props: S3VolumeProps) {}
+  constructor(private props: S3VolumeProps) {}
 
-  public static fromAsset(assetPath: string, asset: Asset, options?: S3VolumeAssetProps) {
-    if (asset.isFile) {
-      if (assetPath.endsWith('/')) {
-        throw new Error('You must specify a full file path for assetPath when asset is a single file.')
-      }
-      const { ext } = parse(assetPath);
-      if (!ext) {
-        console.log(`The path ${assetPath} doesn't have an extension. The assetPath should be the full path of the asset to be copied too.`);
-      }
-    } else {
-      throw new Error('S3Volume does not yet support zip assets.');
-    }
-    return new S3Volume(Names.uniqueId(asset), {
+  public static fromAsset(path: string, containerPath: string, options?: S3VolumeAssetProps) {
+    return new S3Volume({
       ...options,
-      asset,
-      containerPath: assetPath,
+      path,
+      containerPath,
     });
   } 
 
   public static fromBucket(targetBucket: IBucket, options?: S3VolumeProps) {
-    return new S3Volume(Names.uniqueId(targetBucket), {
+    return new S3Volume({
       ...options,
       bucket: targetBucket,
     });
   } 
 
   public extend(taskDefinition: TaskDefinition): void {
-    if ((!this.props.bucket && !this.props.asset) || (!!this.props.bucket && !!this.props.asset)) {
-      throw new Error("You must specify one of bucket or asset.");
+    if ((!this.props.bucket && !this.props.path) || (!!this.props.bucket && !!this.props.path)) {
+      throw new Error("You must specify one of bucket or path.");
     }
 
     let bucket: IBucket;
-    if (this.props.asset) {
-      bucket = this.props.asset.bucket;
+    let asset: Asset | null = null;
+    if (this.props.path) {
+      if (this.props.containerPath == null) {
+        throw new Error('You must specify containerPath when using path.')
+      }
+      asset = new Asset(taskDefinition, `${Names.uniqueResourceName(taskDefinition, {})}-asset`, {
+        path: this.props.path
+      });
+      if (asset.isFile) {
+        if (this.props.containerPath.endsWith('/')) {
+          throw new Error('You must specify a full file path for containerPath when asset is a single file.')
+        }
+        const { ext } = parse(this.props.path);
+        if (!ext) {
+          console.log(`The path ${this.props.path} doesn't have an extension. The path should be the full path of the asset to be copied too.`);
+        }
+      } else {
+        throw new Error('S3Volume does not support folders or zips as source assets. Use bucket deployments if you need to copy multiple files.');
+      }
+      bucket = asset.bucket;
     } else if (typeof this.props.bucket === "string") {
-      bucket = Bucket.fromBucketName(taskDefinition, `${this.id}-${this.props.bucket}`, this.props.bucket);
+      bucket = Bucket.fromBucketName(taskDefinition, `${Names.uniqueResourceName(taskDefinition, {})}-bucket`, this.props.bucket);
     } else {
       bucket = this.props.bucket!;
     }
 
-    if (this.props.asset) {
-      this.props.asset.grantRead(taskDefinition.obtainExecutionRole());
+    if (asset) {
+      asset.grantRead(taskDefinition.obtainExecutionRole());
     } else {
       bucket.grantRead(taskDefinition.obtainExecutionRole());
     }
@@ -158,8 +165,7 @@ export class S3Volume implements ITaskDefinitionExtension {
 
     const syncContainerId = `s3-sync-${Names.uniqueId(taskDefinition)}`;
     let s3Command: string[];
-    if (this.props.asset) {
-      const { asset } = this.props;
+    if (asset) {
       s3Command = [
         "s3",
         "cp",
@@ -181,7 +187,7 @@ export class S3Volume implements ITaskDefinitionExtension {
 
     const syncContainer = taskDefinition.addContainer(syncContainerId, {
       // TODO: Add dependabot/renovate to keep this up to date.
-      image: ContainerImage.fromRegistry(`amazon/aws-cli:2.4.11`),
+      image: ContainerImage.fromRegistry(`amazon/aws-cli:2.7.11`),
       essential: false,
       ...(this.props.syncContainerOptions ?? {}),
       memoryReservationMiB: 512 ?? this.props.syncContainerOptions?.memoryReservationMiB,
