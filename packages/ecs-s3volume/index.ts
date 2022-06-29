@@ -3,13 +3,15 @@ import {
   ContainerImage,
   ITaskDefinitionExtension,
   TaskDefinition,
-  ContainerDefinitionOptions
+  ContainerDefinitionOptions,
+  LogDriver
 } from "aws-cdk-lib/aws-ecs";
 
 import { Names } from "aws-cdk-lib";
 import { IBucket, Bucket } from "aws-cdk-lib/aws-s3";
 import { Asset } from "aws-cdk-lib/aws-s3-assets";
 import { parse, dirname } from "node:path";
+import { RetentionDays } from "aws-cdk-lib/aws-logs";
 
 /** S3 Volume Properties */
 export interface S3VolumeProps {
@@ -59,8 +61,16 @@ export interface S3VolumeProps {
    * @default - Latest aws/aws-cli image and essential: false.
    */
   readonly syncContainerOptions?: ContainerDefinitionOptions;
-}/** S3 Volume Properties */
 
+  /**
+   * Wether or not to mount the volume to the target container as readonly.
+   * 
+   * @default true
+   */
+  readonly readOnly: boolean;
+}
+
+/** S3 Volume Asset Properties */
 export interface S3VolumeAssetProps {
   /**
    * Extra options to add to s3 sync command. See <https://docs.aws.amazon.com/cli/latest/reference/s3/sync.html> for full details.
@@ -91,6 +101,13 @@ export interface S3VolumeAssetProps {
    * @default - Latest aws/aws-cli image and essential: false.
    */
   readonly syncContainerOptions?: ContainerDefinitionOptions;
+
+  /**
+   * Wether or not to mount the volume to the target container as readonly.
+   * 
+   * @default true
+   */
+  readonly readOnly: boolean;
 }
 
 export class S3Volume implements ITaskDefinitionExtension {
@@ -144,9 +161,9 @@ export class S3Volume implements ITaskDefinitionExtension {
     }
 
     if (asset) {
-      asset.grantRead(taskDefinition.obtainExecutionRole());
+      asset.grantRead(taskDefinition.taskRole);
     } else {
-      bucket.grantRead(taskDefinition.obtainExecutionRole());
+      bucket.grantRead(taskDefinition.taskRole);
     }
 
     const volumeName = `s3-${this.props.volume ??
@@ -187,6 +204,10 @@ export class S3Volume implements ITaskDefinitionExtension {
       ...(this.props.syncContainerOptions ?? {}),
       memoryReservationMiB: 256 ?? this.props.syncContainerOptions?.memoryReservationMiB,
       command: s3Command,
+      logging: LogDriver.awsLogs({ 
+        streamPrefix: 'ecs-s3volume',
+        logRetention: RetentionDays.TWO_WEEKS,
+      })
     });
 
     syncContainer.addMountPoints({
@@ -217,7 +238,7 @@ export class S3Volume implements ITaskDefinitionExtension {
         targetContainer.addMountPoints({
           containerPath: containerDirPath,
           sourceVolume: volumeName,
-          readOnly: true
+          readOnly: this.props.readOnly ?? true,
         });
       }
     } else {
@@ -228,7 +249,7 @@ export class S3Volume implements ITaskDefinitionExtension {
       taskDefinition.defaultContainer!.addMountPoints({
         containerPath: containerDirPath,
         sourceVolume: volumeName,
-        readOnly: true
+        readOnly: this.props.readOnly ?? true,
       });
     }
   }
