@@ -14,14 +14,14 @@ importers:
 
   packages/ecs-s3volume:
     specifiers:
-      aws-cdk-lib: 2.15.0
+      aws-cdk-lib: 2.29.1
       constructs: 10.0.89
       jsii: 1.55.0
       jsii-docgen: 6.1.35
       jsii-pacmak: 1.55.0
       jsii-release: 0.2.292
     devDependencies:
-      aws-cdk-lib: 2.15.0_constructs@10.0.89
+      aws-cdk-lib: 2.29.1_constructs@10.0.89
       constructs: 10.0.89
       jsii: 1.55.0
       jsii-docgen: 6.1.35
@@ -389,8 +389,8 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
-  /aws-cdk-lib/2.15.0_constructs@10.0.89:
-    resolution: {integrity: sha512-QyxP4GM8bgwIdvE93V9WgE7y/yutFrY8pRxveCy6uY6E29Na2Lbes+4NT4xxcmLuj8h4bgcimbOreRw01OWcFA==}
+  /aws-cdk-lib/2.29.1_constructs@10.0.89:
+    resolution: {integrity: sha512-tmWhsmSvNrJD9/SFAD0The7hON3VYUcFchKnjPg4vwvY89XzZv76IB24KLy3XoXF33WYvCUzDQPO/bCZQBF4LA==}
     engines: {node: '>= 14.15.0'}
     peerDependencies:
       constructs: ^10.0.0
