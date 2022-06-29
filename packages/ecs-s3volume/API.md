@@ -17,24 +17,10 @@ const s3VolumeAssetProps: S3VolumeAssetProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@richicoder/cdk-ecs-s3volume.S3VolumeAssetProps.property.containerPath">containerPath</a></code> | <code>string</code> | Path to mount S3 volume. |
 | <code><a href="#@richicoder/cdk-ecs-s3volume.S3VolumeAssetProps.property.dependentContainers">dependentContainers</a></code> | <code>string[]</code> | Container for which to mount volume. |
 | <code><a href="#@richicoder/cdk-ecs-s3volume.S3VolumeAssetProps.property.extraOptions">extraOptions</a></code> | <code>string[]</code> | Extra options to add to s3 sync command. |
 | <code><a href="#@richicoder/cdk-ecs-s3volume.S3VolumeAssetProps.property.syncContainerOptions">syncContainerOptions</a></code> | <code>aws-cdk-lib.aws_ecs.ContainerDefinitionOptions</code> | Options to set for the S3 sync container that copies files to the target volume. |
 | <code><a href="#@richicoder/cdk-ecs-s3volume.S3VolumeAssetProps.property.volume">volume</a></code> | <code>string</code> | Name of the volume to mount. |
-
----
-
-##### `containerPath`<sup>Optional</sup> <a name="containerPath" id="@richicoder/cdk-ecs-s3volume.S3VolumeAssetProps.property.containerPath"></a>
-
-```typescript
-public readonly containerPath: string;
-```
-
-- *Type:* string
-- *Default:* /etc/s3/${props.bucket}/
-
-Path to mount S3 volume.
 
 ---
 
@@ -121,28 +107,14 @@ const s3VolumeProps: S3VolumeProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@richicoder/cdk-ecs-s3volume.S3VolumeProps.property.asset">asset</a></code> | <code>aws-cdk-lib.aws_s3_assets.Asset</code> | The asset to sync to the volume. |
 | <code><a href="#@richicoder/cdk-ecs-s3volume.S3VolumeProps.property.bucket">bucket</a></code> | <code>string \| aws-cdk-lib.aws_s3.IBucket</code> | The bucket to sync to the volume. |
 | <code><a href="#@richicoder/cdk-ecs-s3volume.S3VolumeProps.property.bucketKey">bucketKey</a></code> | <code>string</code> | The key of the item to sync. |
 | <code><a href="#@richicoder/cdk-ecs-s3volume.S3VolumeProps.property.containerPath">containerPath</a></code> | <code>string</code> | Path to mount S3 volume. |
 | <code><a href="#@richicoder/cdk-ecs-s3volume.S3VolumeProps.property.dependentContainers">dependentContainers</a></code> | <code>string[]</code> | Container for which to mount volume. |
 | <code><a href="#@richicoder/cdk-ecs-s3volume.S3VolumeProps.property.extraOptions">extraOptions</a></code> | <code>string[]</code> | Extra options to add to s3 sync command. |
+| <code><a href="#@richicoder/cdk-ecs-s3volume.S3VolumeProps.property.path">path</a></code> | <code>string</code> | The asset to sync to the volume. |
 | <code><a href="#@richicoder/cdk-ecs-s3volume.S3VolumeProps.property.syncContainerOptions">syncContainerOptions</a></code> | <code>aws-cdk-lib.aws_ecs.ContainerDefinitionOptions</code> | Options to set for the S3 sync container that copies files to the target volume. |
 | <code><a href="#@richicoder/cdk-ecs-s3volume.S3VolumeProps.property.volume">volume</a></code> | <code>string</code> | Name of the volume to mount. |
-
----
-
-##### `asset`<sup>Optional</sup> <a name="asset" id="@richicoder/cdk-ecs-s3volume.S3VolumeProps.property.asset"></a>
-
-```typescript
-public readonly asset: Asset;
-```
-
-- *Type:* aws-cdk-lib.aws_s3_assets.Asset
-
-The asset to sync to the volume.
-
-One of bucket or asset must be specified.
 
 ---
 
@@ -227,6 +199,20 @@ new S3VolumeExtension({
 ```
 
 
+##### `path`<sup>Optional</sup> <a name="path" id="@richicoder/cdk-ecs-s3volume.S3VolumeProps.property.path"></a>
+
+```typescript
+public readonly path: string;
+```
+
+- *Type:* string
+
+The asset to sync to the volume.
+
+One of bucket or asset must be specified.
+
+---
+
 ##### `syncContainerOptions`<sup>Optional</sup> <a name="syncContainerOptions" id="@richicoder/cdk-ecs-s3volume.S3VolumeProps.property.syncContainerOptions"></a>
 
 ```typescript
@@ -266,19 +252,12 @@ Name of the volume to mount.
 ```typescript
 import { S3Volume } from '@richicoder/cdk-ecs-s3volume'
 
-new S3Volume(id: string, props: S3VolumeProps)
+new S3Volume(props: S3VolumeProps)
 ```
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@richicoder/cdk-ecs-s3volume.S3Volume.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@richicoder/cdk-ecs-s3volume.S3Volume.Initializer.parameter.props">props</a></code> | <code><a href="#@richicoder/cdk-ecs-s3volume.S3VolumeProps">S3VolumeProps</a></code> | *No description.* |
-
----
-
-##### `id`<sup>Required</sup> <a name="id" id="@richicoder/cdk-ecs-s3volume.S3Volume.Initializer.parameter.id"></a>
-
-- *Type:* string
 
 ---
 
@@ -324,18 +303,18 @@ Apply the extension to the given TaskDefinition.
 ```typescript
 import { S3Volume } from '@richicoder/cdk-ecs-s3volume'
 
-S3Volume.fromAsset(assetPath: string, asset: Asset, options?: S3VolumeAssetProps)
+S3Volume.fromAsset(path: string, containerPath: string, options?: S3VolumeAssetProps)
 ```
 
-###### `assetPath`<sup>Required</sup> <a name="assetPath" id="@richicoder/cdk-ecs-s3volume.S3Volume.fromAsset.parameter.assetPath"></a>
+###### `path`<sup>Required</sup> <a name="path" id="@richicoder/cdk-ecs-s3volume.S3Volume.fromAsset.parameter.path"></a>
 
 - *Type:* string
 
 ---
 
-###### `asset`<sup>Required</sup> <a name="asset" id="@richicoder/cdk-ecs-s3volume.S3Volume.fromAsset.parameter.asset"></a>
+###### `containerPath`<sup>Required</sup> <a name="containerPath" id="@richicoder/cdk-ecs-s3volume.S3Volume.fromAsset.parameter.containerPath"></a>
 
-- *Type:* aws-cdk-lib.aws_s3_assets.Asset
+- *Type:* string
 
 ---
 
