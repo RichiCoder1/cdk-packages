@@ -38,7 +38,7 @@
     "jsii": "1.61.0",
     "jsii-docgen": "7.0.43",
     "jsii-pacmak": "1.61.0",
-    "jsii-release": "0.2.397"
+    "jsii-release": "0.2.398"
   },
   "peerDependencies": {
     "aws-cdk-lib": "^2.29.1",

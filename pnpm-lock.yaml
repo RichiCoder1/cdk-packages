@@ -25,7 +25,7 @@ importers:
       jsii: 1.61.0
       jsii-docgen: 7.0.43
       jsii-pacmak: 1.61.0
-      jsii-release: 0.2.397
+      jsii-release: 0.2.398
     devDependencies:
       '@types/node': 18.0.0
       aws-cdk-lib: 2.29.1_constructs@10.1.42
@@ -33,7 +33,7 @@ importers:
       jsii: 1.61.0
       jsii-docgen: 7.0.43_63ac3lm4odtawtbj45mmbxv2xy
       jsii-pacmak: 1.61.0
-      jsii-release: 0.2.397
+      jsii-release: 0.2.398
 
 packages:
 
@@ -1344,8 +1344,8 @@ packages:
       yargs: 16.2.0
     dev: true
 
-  /jsii-release/0.2.397:
-    resolution: {integrity: sha512-17aHP2D3V9nwhietf7WoslL/aO5hwc3xVk7Kzim7VwiZHi0gDghcG+DvWak4B7UWu9zqtN4p/vGg2KmvpDIixw==}
+  /jsii-release/0.2.398:
+    resolution: {integrity: sha512-lWaAd2csprawRlXBACp2LNiql+WVbhAcLspr8q8aHK48K5B9S5JY1XogrlkXf/6RSjyWvwO8UUxb1vBseyXXGQ==}
     hasBin: true
     dependencies:
       '@types/fs-extra': 8.1.2
