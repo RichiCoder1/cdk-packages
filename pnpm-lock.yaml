@@ -21,15 +21,15 @@ importers:
     specifiers:
       '@types/node': ^18.0.0
       aws-cdk-lib: 2.29.1
-      constructs: 10.1.42
+      constructs: 10.1.43
       jsii: 1.61.0
       jsii-docgen: 7.0.43
       jsii-pacmak: 1.61.0
       jsii-release: 0.2.397
     devDependencies:
       '@types/node': 18.0.0
-      aws-cdk-lib: 2.29.1_constructs@10.1.42
-      constructs: 10.1.42
+      aws-cdk-lib: 2.29.1_constructs@10.1.43
+      constructs: 10.1.43
       jsii: 1.61.0
       jsii-docgen: 7.0.43_63ac3lm4odtawtbj45mmbxv2xy
       jsii-pacmak: 1.61.0
@@ -420,7 +420,7 @@ packages:
     engines: {node: '>= 4.0.0'}
     dev: true
 
-  /aws-cdk-lib/2.29.1_constructs@10.1.42:
+  /aws-cdk-lib/2.29.1_constructs@10.1.43:
     resolution: {integrity: sha512-tmWhsmSvNrJD9/SFAD0The7hON3VYUcFchKnjPg4vwvY89XzZv76IB24KLy3XoXF33WYvCUzDQPO/bCZQBF4LA==}
     engines: {node: '>= 14.15.0'}
     peerDependencies:
@@ -428,7 +428,7 @@ packages:
     dependencies:
       '@balena/dockerignore': 1.0.2
       case: 1.6.3
-      constructs: 10.1.42
+      constructs: 10.1.43
       fs-extra: 9.1.0
       ignore: 5.2.0
       jsonschema: 1.4.1
@@ -605,8 +605,8 @@ packages:
     resolution: {integrity: sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=}
     dev: true
 
-  /constructs/10.1.42:
-    resolution: {integrity: sha512-5AELa/PFtZG+WTjn9HoXhqsDZYV6l3J7Li9xw6vREYVMasF8cnVbTZvA4crP1gIyKtBAxAlnZCmzmCbicnH6eg==}
+  /constructs/10.1.43:
+    resolution: {integrity: sha512-I7CEsYPmcsTpmf+tT3DZq5klCzk2d0Gb6X67P5XxYq0an4+JiWrf8/LCIHV3xqOhnGLAbM/aGZ3bigUNTWeliA==}
     engines: {node: '>= 14.17.0'}
     dev: true
 
