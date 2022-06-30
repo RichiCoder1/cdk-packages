@@ -19,7 +19,7 @@ importers:
 
   packages/ecs-s3volume:
     specifiers:
-      '@types/node': ^18.0.0
+      '@types/node': 18.0.0
       aws-cdk-lib: 2.29.1
       constructs: 10.1.42
       jsii: 1.61.0

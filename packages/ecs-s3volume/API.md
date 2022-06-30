@@ -5,6 +5,8 @@
 
 ### S3VolumeAssetProps <a name="S3VolumeAssetProps" id="@richicoder/cdk-ecs-s3volume.S3VolumeAssetProps"></a>
 
+S3 Volume Asset Properties.
+
 #### Initializer <a name="Initializer" id="@richicoder/cdk-ecs-s3volume.S3VolumeAssetProps.Initializer"></a>
 
 ```typescript
@@ -19,6 +21,7 @@ const s3VolumeAssetProps: S3VolumeAssetProps = { ... }
 | --- | --- | --- |
 | <code><a href="#@richicoder/cdk-ecs-s3volume.S3VolumeAssetProps.property.dependentContainers">dependentContainers</a></code> | <code>string[]</code> | Container for which to mount volume. |
 | <code><a href="#@richicoder/cdk-ecs-s3volume.S3VolumeAssetProps.property.extraOptions">extraOptions</a></code> | <code>string[]</code> | Extra options to add to s3 sync command. |
+| <code><a href="#@richicoder/cdk-ecs-s3volume.S3VolumeAssetProps.property.readOnly">readOnly</a></code> | <code>boolean</code> | Wether or not to mount the volume to the target container as readonly. |
 | <code><a href="#@richicoder/cdk-ecs-s3volume.S3VolumeAssetProps.property.syncContainerOptions">syncContainerOptions</a></code> | <code>aws-cdk-lib.aws_ecs.ContainerDefinitionOptions</code> | Options to set for the S3 sync container that copies files to the target volume. |
 | <code><a href="#@richicoder/cdk-ecs-s3volume.S3VolumeAssetProps.property.volume">volume</a></code> | <code>string</code> | Name of the volume to mount. |
 
@@ -62,6 +65,19 @@ new S3VolumeExtension({
 });
 ```
 
+
+##### `readOnly`<sup>Optional</sup> <a name="readOnly" id="@richicoder/cdk-ecs-s3volume.S3VolumeAssetProps.property.readOnly"></a>
+
+```typescript
+public readonly readOnly: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true
+
+Wether or not to mount the volume to the target container as readonly.
+
+---
 
 ##### `syncContainerOptions`<sup>Optional</sup> <a name="syncContainerOptions" id="@richicoder/cdk-ecs-s3volume.S3VolumeAssetProps.property.syncContainerOptions"></a>
 
@@ -113,6 +129,7 @@ const s3VolumeProps: S3VolumeProps = { ... }
 | <code><a href="#@richicoder/cdk-ecs-s3volume.S3VolumeProps.property.dependentContainers">dependentContainers</a></code> | <code>string[]</code> | Container for which to mount volume. |
 | <code><a href="#@richicoder/cdk-ecs-s3volume.S3VolumeProps.property.extraOptions">extraOptions</a></code> | <code>string[]</code> | Extra options to add to s3 sync command. |
 | <code><a href="#@richicoder/cdk-ecs-s3volume.S3VolumeProps.property.path">path</a></code> | <code>string</code> | The asset to sync to the volume. |
+| <code><a href="#@richicoder/cdk-ecs-s3volume.S3VolumeProps.property.readOnly">readOnly</a></code> | <code>boolean</code> | Wether or not to mount the volume to the target container as readonly. |
 | <code><a href="#@richicoder/cdk-ecs-s3volume.S3VolumeProps.property.syncContainerOptions">syncContainerOptions</a></code> | <code>aws-cdk-lib.aws_ecs.ContainerDefinitionOptions</code> | Options to set for the S3 sync container that copies files to the target volume. |
 | <code><a href="#@richicoder/cdk-ecs-s3volume.S3VolumeProps.property.volume">volume</a></code> | <code>string</code> | Name of the volume to mount. |
 
@@ -210,6 +227,19 @@ public readonly path: string;
 The asset to sync to the volume.
 
 One of bucket or asset must be specified.
+
+---
+
+##### `readOnly`<sup>Optional</sup> <a name="readOnly" id="@richicoder/cdk-ecs-s3volume.S3VolumeProps.property.readOnly"></a>
+
+```typescript
+public readonly readOnly: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true
+
+Wether or not to mount the volume to the target container as readonly.
 
 ---
 
