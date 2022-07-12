@@ -22,7 +22,7 @@ importers:
       '@types/node': ^18.0.0
       aws-cdk-lib: 2.29.1
       constructs: 10.1.42
-      jsii: 1.61.0
+      jsii: 1.62.0
       jsii-docgen: 7.0.43
       jsii-pacmak: 1.61.0
       jsii-release: 0.2.397
@@ -30,7 +30,7 @@ importers:
       '@types/node': 18.0.0
       aws-cdk-lib: 2.29.1_constructs@10.1.42
       constructs: 10.1.42
-      jsii: 1.61.0
+      jsii: 1.62.0
       jsii-docgen: 7.0.43_63ac3lm4odtawtbj45mmbxv2xy
       jsii-pacmak: 1.61.0
       jsii-release: 0.2.397
@@ -260,8 +260,23 @@ packages:
       semver: 7.3.7
     dev: true
 
+  /@jsii/check-node/1.62.0:
+    resolution: {integrity: sha512-jYmY12Vrz3/0MJ9GTEfIxf4yh/7fsgYmuBp2UQfDLSfx+eaBvOG4xbjvsoa/AvfWF5VU95QqKAJLBDMOQK4z1g==}
+    engines: {node: '>= 14.6.0'}
+    dependencies:
+      chalk: 4.1.2
+      semver: 7.3.7
+    dev: true
+
   /@jsii/spec/1.61.0:
     resolution: {integrity: sha512-pv1jAZY+gez62BCiHwfdCnjl2reye88QOKsD5IlCf7XbmvyQ4xFXVV2EnFzv4HUUtr+yuBj/tZz0HjOFsEBUQw==}
+    engines: {node: '>= 14.6.0'}
+    dependencies:
+      ajv: 8.11.0
+    dev: true
+
+  /@jsii/spec/1.62.0:
+    resolution: {integrity: sha512-KR2ttOgZjyNHKkPDLFUnOnLPml0KLjwfYNEQTtYQKjhhIrlZZwnc1azYZ4GapLTgnklZVNgsDsbBW0sXKYJIhA==}
     engines: {node: '>= 14.6.0'}
     dependencies:
       ajv: 8.11.0
@@ -1337,7 +1352,7 @@ packages:
     hasBin: true
     dependencies:
       '@jsii/check-node': 1.61.0
-      '@jsii/spec': 1.61.0
+      '@jsii/spec': 1.62.0
       chalk: 4.1.2
       fs-extra: 10.1.0
       oo-ascii-tree: 1.61.0
@@ -1381,7 +1396,7 @@ packages:
     hasBin: true
     dependencies:
       '@jsii/check-node': 1.61.0
-      '@jsii/spec': 1.61.0
+      '@jsii/spec': 1.62.0
       case: 1.6.3
       chalk: 4.1.2
       fast-deep-equal: 3.1.3
@@ -1392,6 +1407,28 @@ packages:
       sort-json: 2.0.1
       spdx-license-list: 6.6.0
       typescript-3.9: /typescript/3.9.10
+      yargs: 16.2.0
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
+  /jsii/1.62.0:
+    resolution: {integrity: sha512-NMUhHWNAm9Kl80r0ezY/UCglZsBUYgWG0TOAhdqhqcETgepGf2sH+8wLKzm44wejpv6MBvaDpReViOYEhUxx/g==}
+    engines: {node: '>= 14.6.0'}
+    hasBin: true
+    dependencies:
+      '@jsii/check-node': 1.62.0
+      '@jsii/spec': 1.62.0
+      case: 1.6.3
+      chalk: 4.1.2
+      fast-deep-equal: 3.1.3
+      fs-extra: 10.1.0
+      log4js: 6.5.2
+      semver: 7.3.7
+      semver-intersect: 1.4.0
+      sort-json: 2.0.1
+      spdx-license-list: 6.6.0
+      typescript: 3.9.10
       yargs: 16.2.0
     transitivePeerDependencies:
       - supports-color
