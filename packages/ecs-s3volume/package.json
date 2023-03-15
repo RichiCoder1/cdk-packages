@@ -41,7 +41,7 @@
     "jsii-release": "0.2.620"
   },
   "peerDependencies": {
-    "aws-cdk-lib": "^2.29.1",
-    "constructs": "^10.1.42"
+    "aws-cdk-lib": "^2.50.0",
+    "constructs": "^10.1.115"
   }
 }
