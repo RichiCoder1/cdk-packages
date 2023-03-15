@@ -219,13 +219,15 @@ export class S3Volume implements ITaskDefinitionExtension {
       ];
     }
 
+    const { syncContainerOptions } = this.props;
+
     const syncContainer = taskDefinition.addContainer(syncContainerId, {
       // TODO: Add dependabot/renovate to keep this up to date.
-      image: ContainerImage.fromRegistry(`amazon/aws-cli:2.7.11`),
+      image: ContainerImage.fromRegistry(`public.ecr.aws/aws-cli/aws-cli:2.11.2`),
       essential: false,
-      ...(this.props.syncContainerOptions ?? {}),
+      ...(syncContainerOptions ?? {}),
       memoryReservationMiB:
-        256 ?? this.props.syncContainerOptions?.memoryReservationMiB,
+        256 ?? syncContainerOptions?.memoryReservationMiB,
       command: s3Command,
       logging: LogDriver.awsLogs({
         streamPrefix: "ecs-s3volume",
