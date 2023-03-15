@@ -195,7 +195,7 @@ export class S3Volume implements ITaskDefinitionExtension {
 
     const containerContentsPath =
       this.props.containerPath ?? `/etc/s3/${bucket.bucketName}/`;
-    const containerPath = dirname(containerContentsPath);
+    const containerPath = containerContentsPath.endsWith('/') ? containerContentsPath : dirname(containerContentsPath);
 
     const syncContainerId = `s3-sync-${Names.uniqueId(taskDefinition)}`;
     let s3Command: string[];
