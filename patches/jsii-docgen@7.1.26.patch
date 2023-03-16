@@ -1,0 +1,31 @@
+diff --git a/lib/docgen/view/documentation.js b/lib/docgen/view/documentation.js
+index 68784753322008a5920dd930eb01f278f2d1e1b5..51c59ca4a26992e8625c1f4ab339b52cb53bf514 100644
+--- a/lib/docgen/view/documentation.js
++++ b/lib/docgen/view/documentation.js
+@@ -226,10 +226,8 @@ class Documentation {
+             return cached;
+         }
+         const created = await withTempDir(async (workdir) => {
+-            // always better not to pollute an externally provided directory
+-            await fs.copy(this.assembliesDir, workdir);
+             const ts = new reflect.TypeSystem();
+-            for (let dotJsii of await glob.promise(`${workdir}/**/${spec_1.SPEC_FILE_NAME}`)) {
++            for (let dotJsii of await glob.promise(`${this.assembliesDir}/**/${spec_1.SPEC_FILE_NAME}`)) {
+                 // we only transliterate the top level assembly and not the entire type-system.
+                 // note that the only reason to translate dependant assemblies is to show code examples
+                 // for expanded python arguments - which we don't to right now anyway.
+@@ -239,12 +237,12 @@ class Documentation {
+                 if (language && spec.name === this.assemblyName) {
+                     const packageDir = path.dirname(dotJsii);
+                     try {
+-                        await (0, transliterate_1.transliterateAssembly)([packageDir], [language], { loose: options.loose, unknownSnippets: jsii_rosetta_1.UnknownSnippetMode.FAIL });
++                        await (0, transliterate_1.transliterateAssembly)([packageDir], [language], { loose: options.loose, unknownSnippets: jsii_rosetta_1.UnknownSnippetMode.FAIL, outdir: workdir });
+                     }
+                     catch (e) {
+                         throw new __1.LanguageNotSupportedError(`Laguage ${language} is not supported for package ${this.assemblyFqn} (cause: ${e.message})`);
+                     }
+-                    dotJsii = path.join(packageDir, `${spec_1.SPEC_FILE_NAME}.${language}`);
++                    dotJsii = path.join(workdir, `${spec_1.SPEC_FILE_NAME}.${language}`);
+                 }
+                 await ts.load(dotJsii, { validate: options.validate });
+             }

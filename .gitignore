@@ -19,3 +19,7 @@ cdk.out/
 
 # Caching
 packages/**/.turbo
+
+# Docs
+*.zip
+*.tgz

@@ -24,6 +24,9 @@
   "pnpm": {
     "overrides": {
       "jsii": "v4.9-next"
+    },
+    "patchedDependencies": {
+      "jsii-docgen@7.1.26": "patches/jsii-docgen@7.1.26.patch"
     }
   }
 }
