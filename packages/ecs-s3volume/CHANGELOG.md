@@ -1,5 +1,16 @@
 # @richicoder/cdk-ecs-s3volume
 
+## 0.6.0
+
+### Minor Changes
+
+- 41a1c9b: Fix an issue where directories were being artificially shortened when mounted, result in some suprisingly behavior
+- 182b40c: bump package dependencies
+
+### Patch Changes
+
+- e70d46b: fix contents path functionality
+
 ## 0.5.3
 
 ### Patch Changes
