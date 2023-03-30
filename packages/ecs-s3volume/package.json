@@ -35,7 +35,7 @@
     "@types/node": "^18.15.3",
     "aws-cdk-lib": "2.69.0",
     "constructs": "10.1.278",
-    "jsii": "1.77.0",
+    "jsii": "5.0.2",
     "jsii-docgen": "7.1.26",
     "jsii-pacmak": "1.78.1",
     "jsii-release": "0.2.620"
