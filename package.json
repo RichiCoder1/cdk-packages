@@ -11,22 +11,19 @@
     "release:publish": "changeset publish",
     "release": "run-s release:build release:publish"
   },
-  "packageManager": "pnpm@7.29.3",
+  "packageManager": "pnpm@8.1.0",
   "devDependencies": {
-    "@changesets/cli": "2.26.0",
+    "@changesets/cli": "2.26.1",
     "npm-run-all": "4.1.5",
-    "turbo": "1.8.3"
+    "turbo": "1.8.8"
   },
   "engines": {
     "node": ">=16",
     "pnpm": ">=6"
   },
   "pnpm": {
-    "overrides": {
-      "jsii": "v4.9-next"
-    },
     "patchedDependencies": {
-      "jsii-docgen@7.1.26": "patches/jsii-docgen@7.1.26.patch"
+      "jsii-docgen@7.1.41": "patches/jsii-docgen@7.1.26.patch"
     }
   }
 }
