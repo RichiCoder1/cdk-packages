@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 patchedDependencies:
   jsii-docgen@7.1.41:
     hash: gtcbwbelha2f4q4aqcosnts7iy
