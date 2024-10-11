@@ -37,7 +37,7 @@
     "constructs": "10.1.296",
     "jsii": "5.2.30",
     "jsii-docgen": "7.1.41",
-    "jsii-pacmak": "1.79.0",
+    "jsii-pacmak": "1.104.0",
     "jsii-release": "0.2.790"
   },
   "peerDependencies": {
