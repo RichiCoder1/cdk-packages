@@ -34,7 +34,7 @@
   "devDependencies": {
     "@types/node": "^18.15.11",
     "aws-cdk-lib": "2.72.0",
-    "constructs": "10.1.296",
+    "constructs": "10.4.2",
     "jsii": "5.2.30",
     "jsii-docgen": "7.1.41",
     "jsii-pacmak": "1.79.0",
