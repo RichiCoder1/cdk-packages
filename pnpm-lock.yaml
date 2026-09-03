@@ -26,10 +26,10 @@ importers:
         version: 18.15.11
       aws-cdk-lib:
         specifier: 2.72.0
-        version: 2.72.0(constructs@10.1.296)
+        version: 2.72.0(constructs@10.8.1)
       constructs:
-        specifier: 10.1.296
-        version: 10.1.296
+        specifier: 10.8.1
+        version: 10.8.1
       jsii:
         specifier: 5.2.30
         version: 5.2.30
@@ -1340,6 +1340,69 @@ packages:
     resolution: {integrity: sha512-KQf+QAMWKMrtBMsB8/24w53tEsxllMj6TuA80TT/5igJalLI/zm0L3oXRbIAl4Ohfc85gyHX/jhMwsVkmhLU4A==}
     dev: true
 
+  /@typescript/typescript-darwin-arm64@7.1.0-dev.20260903.1:
+    resolution: {integrity: sha512-+CQ/ky5OkDHN+9gXJKrbUTpbNHRi7e6XOS5icdyBN57OqXhWygT8JH2XpTl1j5T9MxaoMzLjYRW+OaCwvNDpNQ==}
+    engines: {node: '>=16.20.0'}
+    cpu: [arm64]
+    os: [darwin]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@typescript/typescript-darwin-x64@7.1.0-dev.20260903.1:
+    resolution: {integrity: sha512-qeocDSgcslTWBVdg1IA2/OcYg1vDXBDpnjdTaTdbB8npgcQxFA1iyGnajJFd2WtEgiNDWvRO239CPiJYJpsTfw==}
+    engines: {node: '>=16.20.0'}
+    cpu: [x64]
+    os: [darwin]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@typescript/typescript-linux-arm64@7.1.0-dev.20260903.1:
+    resolution: {integrity: sha512-HZ3RWslCTyC3RcvD31bbmqFjg8PPthPqUvJzlnpbw/jsUnsCE/LaKrTC/8AQtkqb0XHi0Mhi/VT+kHZWKugpMg==}
+    engines: {node: '>=16.20.0'}
+    cpu: [arm64]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@typescript/typescript-linux-arm@7.1.0-dev.20260903.1:
+    resolution: {integrity: sha512-OddAcYjjW/N3YIlnLLrifVxrFONAAF835L+JfXozQwsSq/4w6sQBaGw8WVRs+KJuCNZ2z9dTvx0EmEhm9jI8YQ==}
+    engines: {node: '>=16.20.0'}
+    cpu: [arm]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@typescript/typescript-linux-x64@7.1.0-dev.20260903.1:
+    resolution: {integrity: sha512-zKK5QxJSofs6V6w4lbgdRf9R10fdbBjHZ1sF6uRZePmzjqDCS6ELTPSEujPR+Iy8iFqZBo87ZmR1baDmuFtJjw==}
+    engines: {node: '>=16.20.0'}
+    cpu: [x64]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@typescript/typescript-win32-arm64@7.1.0-dev.20260903.1:
+    resolution: {integrity: sha512-IT0nShRuiDbHl+3wRwXjCQA+PDE3pRwhRz+97z+UlRSjyQ3UgWNNdGEh/pALk6gK2hBfsEuoKNtHLHquq8hRug==}
+    engines: {node: '>=16.20.0'}
+    cpu: [arm64]
+    os: [win32]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@typescript/typescript-win32-x64@7.1.0-dev.20260903.1:
+    resolution: {integrity: sha512-iK/eeSrtrIsFPGKBhsxnHC7P/hX2FwzVff3j0UnbCDKNiJb4G6WUiC9+qth30QBCCBGJ5ba70RG0qcuUcLm+0A==}
+    engines: {node: '>=16.20.0'}
+    cpu: [x64]
+    os: [win32]
+    requiresBuild: true
+    dev: true
+    optional: true
+
   /@xmldom/xmldom@0.8.6:
     resolution: {integrity: sha512-uRjjusqpoqfmRkTaNuLJ2VohVr67Q5YwDATW3VU7PfzTj6IRaihGrYI7zckGZjxQPBIp63nfvJbM+Yu5ICh0Bg==}
     engines: {node: '>=10.0.0'}
@@ -1426,7 +1489,7 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
-  /aws-cdk-lib@2.72.0(constructs@10.1.296):
+  /aws-cdk-lib@2.72.0(constructs@10.8.1):
     resolution: {integrity: sha512-btGCt+37VOtTjdv2jQv8S4n1DE4Cope9tdtzX1AK6YoWHEBkqLLNvSsG4sFbcPekf2jeLmZcreaUYESpwXcc8g==}
     engines: {node: '>= 14.15.0'}
     peerDependencies:
@@ -1437,7 +1500,7 @@ packages:
       '@aws-cdk/asset-node-proxy-agent-v5': 2.0.100
       '@balena/dockerignore': 1.0.2
       case: 1.6.3
-      constructs: 10.1.296
+      constructs: 10.8.1
       fs-extra: 9.1.0
       ignore: 5.2.4
       jsonschema: 1.4.1
@@ -1636,9 +1699,8 @@ packages:
     resolution: {integrity: sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=}
     dev: true
 
-  /constructs@10.1.296:
-    resolution: {integrity: sha512-0LflyPhVfxhGAUjn/tJ03itnmW8zkfPhflURs9pzD+p9+oxc3Wyke58E3epCB0wsFBOw9PV0XV1ABpIYi8grEg==}
-    engines: {node: '>= 14.17.0'}
+  /constructs@10.8.1:
+    resolution: {integrity: sha512-98yGXYyhePqPYh3cYu8nzBERmAhC0DONe3UD03okK0nehZ7hYP4wgZuf02a04+uOWxnTJ5Rpp5m0GRNpwyLGGA==}
     dev: true
 
   /cross-spawn@5.1.0:
@@ -1759,7 +1821,7 @@ packages:
     dependencies:
       semver: 7.5.4
       shelljs: 0.8.5
-      typescript: 5.4.0-dev.20240207
+      typescript: 7.1.0-dev.20260903.1
     dev: true
 
   /emoji-regex@8.0.0:
@@ -3497,10 +3559,18 @@ packages:
     hasBin: true
     dev: true
 
-  /typescript@5.4.0-dev.20240207:
-    resolution: {integrity: sha512-BD7gF4QnjiTzOPqstgkgBxANkltT6VsZS6gFjXf7haPWTgrcebvCNQr1yGazb0o18RVtNXeHs6lDbXKqhJhiQQ==}
-    engines: {node: '>=14.17'}
+  /typescript@7.1.0-dev.20260903.1:
+    resolution: {integrity: sha512-xp/rsu6Whgm+q5K4Ym4KvQ7NBd1Zp9PtU9fdYdCwYvLUL80lA749aKr81fgBHYm/p2Bql4hMoM7NeGQCLe36YQ==}
+    engines: {node: '>=16.20.0'}
     hasBin: true
+    optionalDependencies:
+      '@typescript/typescript-darwin-arm64': 7.1.0-dev.20260903.1
+      '@typescript/typescript-darwin-x64': 7.1.0-dev.20260903.1
+      '@typescript/typescript-linux-arm': 7.1.0-dev.20260903.1
+      '@typescript/typescript-linux-arm64': 7.1.0-dev.20260903.1
+      '@typescript/typescript-linux-x64': 7.1.0-dev.20260903.1
+      '@typescript/typescript-win32-arm64': 7.1.0-dev.20260903.1
+      '@typescript/typescript-win32-x64': 7.1.0-dev.20260903.1
     dev: true
 
   /unbox-primitive@1.0.2:
